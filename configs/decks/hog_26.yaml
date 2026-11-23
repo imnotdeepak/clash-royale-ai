@@ -1,0 +1,10 @@
+# Deck A (MASTER_PLAN §5.2). Engine card names.
+deck_id: hog_26
+display_name: Hog 2.6
+cards: [HogRider, Musketeer, Cannon, IceGolemite, IceSpirits, Skeletons, Fireball, Log]
+forms: basic            # no evolutions / heroes (§5.1)
+levels: engine_default  # tournament standard, level 11 as shipped by royalesim
+roles: [agent, mirror_opponent]
+admission:
+  status: g0_audit       # becomes `validated` when G0 passes
+  gate: G0

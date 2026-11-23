@@ -1,0 +1,17 @@
+# Tactical scenario identifiers (MASTER_PLAN §9.1). Registered in P0; implemented in P1.
+# Scenario scores are never interchangeable with match win rates.
+registry_version: scenarios_v1
+scenarios:
+  - {id: legal_play_basics,         mutator: MidGameStateMutator,       requires: [hog_26]}
+  - {id: wait_under_pressure,       mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: cannon_hog_pull,           mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: ice_golem_kite,            mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: ice_spirit_freeze_timing,  mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: musketeer_support_defense, mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: giant_support_separation,  mutator: ScriptedBoardStateMutator, requires: [hog_26, starter_giant]}
+  - {id: spell_tower_finisher,      mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: hog_cycle_punish,          mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: cycle_to_counter,          mutator: SnapshotStateMutator,      requires: [hog_26]}
+  - {id: counterpush_conversion,    mutator: ScriptedBoardStateMutator, requires: [hog_26]}
+  - {id: close_finish_lethal,       mutator: MidGameStateMutator,       requires: [hog_26]}
+  - {id: overtime_tiebreak,         mutator: MidGameStateMutator,       requires: [hog_26]}

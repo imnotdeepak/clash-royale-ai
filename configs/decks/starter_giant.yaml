@@ -1,0 +1,12 @@
+# Deck B (MASTER_PLAN §5.3). Engine card names ("Archer" = Archers).
+deck_id: starter_giant
+display_name: Starter Giant
+cards: [Knight, Archer, Giant, Minions, Fireball, Zap, Cannon, Musketeer]
+forms: basic
+levels: engine_default
+roles: [opponent]
+new_cards_to_audit: [Knight, Archer, Giant, Minions, Zap]   # G1-owned
+eligible_pilots: [random_legal, first_affordable, defend, push, patient]   # weak Giant pilots (§5.7)
+admission:
+  status: pending_g1
+  gate: G1

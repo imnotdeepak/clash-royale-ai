@@ -1,0 +1,15 @@
+# Deck-split manifest (MASTER_PLAN §10.3). Schema defined in P0; memberships FROZEN at G1.
+# Decks are referenced by registry key AND canonical id (sorted-card hash), checked on load.
+# After G1, `frozen: true` and any change needs a new split_version, never an edit.
+split_version: deck_splits_v0_draft
+card_pool_version: hog26_starter_giant_tesla_v1
+frozen: false
+seed_manifest: hog_mirror_v1
+pools:
+  train:
+    - {key: hog_26, canonical_id: deck_a7d642146a14}
+  validation: []
+  test: []
+pending_admission:
+  - {key: starter_giant, canonical_id: deck_08d9bec2a1c7, gate: G1}
+  - {key: hog_control, canonical_id: deck_870d32160054, gate: G1_or_later}

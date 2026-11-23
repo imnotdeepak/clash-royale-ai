@@ -1,0 +1,12 @@
+# Deck C, provisional (MASTER_PLAN §5.4).
+deck_id: hog_control
+display_name: Hog control candidate
+cards: [HogRider, Knight, Tesla, Musketeer, Skeletons, Fireball, Log, IceSpirits]
+forms: basic
+levels: engine_default
+roles: [opponent]
+new_cards_to_audit: [Tesla]
+pinned_pilot: first_affordable   # never substitute; disable benchmark if it cannot pilot the deck
+admission:
+  status: pending_tesla_audit
+  gate: G1_or_later

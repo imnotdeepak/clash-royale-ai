@@ -1,0 +1,96 @@
+# Benchmark registry (MASTER_PLAN §10.1). Project-defined ids, not RoyaleGym fixtures.
+# status: active | pending_admission | blocked | not_before_phase
+# agent_seats: every benchmark plays each seed on both seats (seat_pairs in the seed manifest).
+registry_version: benchmarks_v1
+seed_manifest: hog_mirror_v1
+benchmarks:
+  - id: engine_legal_contract
+    phase: P0
+    status: active
+    what: every executed action legal under the mask; deterministic replay
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: random_legal
+    agent_seats: [blue, red]
+    metric: illegal_action_count == 0 and replay_divergences == 0
+  - id: hog_mirror_random_legal
+    phase: P1
+    status: active
+    required_for: [G2]
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: random_legal
+    agent_seats: [blue, red]
+    metric: win_rate_draws_separate
+  - id: hog_mirror_noop
+    phase: P1
+    status: active
+    required_for: [G2]
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: noop
+    agent_seats: [blue, red]
+    metric: win_rate_draws_separate
+  - id: hog_mirror_scripted
+    phase: P1
+    status: blocked
+    blocked_by: hog_cycle pilot not implemented
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: hog_cycle
+    agent_seats: [blue, red]
+    metric: win_rate_draws_separate
+  - id: hog_vs_giant_scripted
+    phase: P1
+    status: pending_admission
+    requires_admission: starter_giant
+    agent_deck: hog_26
+    opponent_deck: starter_giant
+    pilot: first_affordable
+    agent_seats: [blue, red]
+    metric: win_rate_draws_separate
+  - id: hog_vs_control_scripted
+    phase: P1
+    status: pending_admission
+    requires_admission: hog_control
+    agent_deck: hog_26
+    opponent_deck: hog_control
+    pilot: first_affordable   # pinned (§5.4)
+    agent_seats: [blue, red]
+    metric: win_rate_draws_separate
+  - id: hog_tactical_scenarios
+    phase: P1
+    status: not_before_phase
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: first_affordable
+    agent_seats: [blue, red]
+    metric: scenario_success_rate   # never mixed with match win rate
+  - id: hog_vs_frozen_checkpoint
+    phase: P2
+    status: not_before_phase
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: frozen_hog_v1
+    agent_seats: [blue, red]
+    metric: paired_win_probability
+  - id: champion_paired_seat_swap
+    phase: P2
+    status: not_before_phase
+    agent_deck: hog_26
+    opponent_deck: hog_26
+    pilot: frozen_hog_v1
+    agent_seats: [blue, red]
+    metric: paired_difference_ci
+  - id: multideck_matchup_matrix
+    phase: P3
+    status: not_before_phase
+    metric: per_deck_win_rate_with_hog_retention
+  - id: heldout_deck_zero_shot
+    phase: P4
+    status: not_before_phase
+    metric: zero_shot_win_rate_and_regret
+  - id: unseen_card_transfer
+    phase: P4
+    status: not_before_phase
+    metric: transfer_win_rate_finetune_disclosed
