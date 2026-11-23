@@ -6,7 +6,7 @@ This project never interacts with the live game.
 
 ## Status
 
-**Phase P0: simulator and environment verification.** No neural-network work has started yet.
+**Phase P0: simulator and environment verification.** The P0 checklist is implemented. 163 tests cover installation, the action/mask contract, fair observations, seat mapping and symmetry, replay determinism, match-end rules, reward-shaping math, deck splits, the benchmark registry, the trainer audit, and 22 Hog 2.6 card-fidelity fixtures. No neural-network training has started yet.
 
 ## Docs
 
