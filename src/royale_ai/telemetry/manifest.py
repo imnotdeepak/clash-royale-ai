@@ -53,10 +53,13 @@ def config_hash(config: Any) -> str:
     return hashlib.sha256(json.dumps(config, sort_keys=True, default=str).encode()).hexdigest()[:16]
 
 
-def card_data_version(engine: Any) -> str:
+def card_data_version(engine: Any) -> Any:
+    """The engine's card-table stamp (hash + client vintage), kept structured."""
     stamp = getattr(engine, "card_table_stamp", None)
     stamp = stamp() if callable(stamp) else stamp
-    return str(stamp) if stamp is not None else "unknown"
+    if stamp is None:
+        return "unknown"
+    return dict(stamp) if isinstance(stamp, dict) else str(stamp)
 
 
 def build_manifest(

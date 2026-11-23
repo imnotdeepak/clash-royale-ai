@@ -19,6 +19,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+train = ["sb3-contrib==2.9.2"]  # Path A trainer under audit (MASTER_PLAN §9.4)
 
 [tool.setuptools.packages.find]
 where = ["src"]
