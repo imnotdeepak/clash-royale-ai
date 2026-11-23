@@ -19,6 +19,23 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip
 # CPU-only PyTorch (no NVIDIA GPU on the dev machine):
 .\.venv\Scripts\python.exe -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,train]"
 .\.venv\Scripts\python.exe scripts\verify_install.py
 ```
+
+## Common commands
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q             # full suite (~1 min on CPU)
+.\.venv\Scripts\python.exe scripts\play_random.py   # seeded Hog 2.6 match -> verified replay + manifest in runs/
+```
+
+## Layout
+
+- `src/royale_ai/adapters/`: the RoyaleGym boundary (seats, action schema `tiles_18x32_v1`, episode ends)
+- `src/royale_ai/observations/`: the seat-symmetry adapter (works around simulator issue KB-001)
+- `src/royale_ai/scenarios/harness.py`: raw-engine harness for card-fidelity fixtures
+- `src/royale_ai/training/pbrs.py`: outcome reward, potential-based shaping, physical-time discounting
+- `src/royale_ai/benchmarks/`: benchmark, scenario and deck-split registries; frozen seed manifests
+- `configs/`: decks, benchmarks, scenarios, deck splits, seeds
+- `runs/` (gitignored): replays and run manifests
