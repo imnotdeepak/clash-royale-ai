@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "royale-ai"
+version = "0.0.1"
+description = "Offline simulator-based RL agent for a Clash Royale-style card battler (see docs/MASTER_PLAN.md)"
+readme = "README.md"
+requires-python = ">=3.12"
+# torch is installed separately (CPU or CUDA wheel index), see README / MASTER_PLAN §13 Task 1.
+dependencies = [
+    "royalegym[sim,learn,viser]==0.1.31",
+    "royalesim==0.1.55",
+    "royalelearn==0.5.26",
+    "numpy",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
