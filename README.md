@@ -10,7 +10,7 @@ This project never interacts with the live game.
 
 ## Docs
 
-- [`docs/MASTER_PLAN.md`](docs/MASTER_PLAN.md): the single authoritative spec (phases, gates, contracts, training and evaluation protocol).
+- The design spec (`docs/MASTER_PLAN.md`) is kept locally and is not published in this repo.
 
 ## Setup (Windows 11, Python 3.12)
 
