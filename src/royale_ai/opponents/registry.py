@@ -33,6 +33,12 @@ class Pilot:
         return self.factory()
 
 
+def _hog_cycle() -> object:
+    from royale_ai.opponents.hog_cycle import HogCyclePilot
+
+    return HogCyclePilot()
+
+
 PILOTS: dict[str, Pilot] = {
     "noop": Pilot("noop", "passive", rg.NoopOpponent),
     "random_legal": Pilot("random_legal", "random", rg.RandomLegalOpponent),
@@ -40,7 +46,7 @@ PILOTS: dict[str, Pilot] = {
     "defend": Pilot("defend", "simple_scripted", rg.DefendOpponent),
     "push": Pilot("push", "simple_scripted", rg.PushOpponent),
     "patient": Pilot("patient", "simple_scripted", rg.PatientOpponent),
-    "hog_cycle": Pilot("hog_cycle", "simple_scripted", None, hog_only=True, note="custom, P1"),
+    "hog_cycle": Pilot("hog_cycle", "simple_scripted", _hog_cycle, hog_only=True, note="custom, needs bind(env, seat)"),
 }
 
 RETIRED = {"cycle_fast", "basic_defender", "scripted_hog", "simple_hog"}

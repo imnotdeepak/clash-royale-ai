@@ -33,8 +33,7 @@ benchmarks:
     metric: win_rate_draws_separate
   - id: hog_mirror_scripted
     phase: P1
-    status: blocked
-    blocked_by: hog_cycle pilot not implemented
+    status: active   # hog_cycle implemented 2026-11-23 (tests/test_hog_cycle.py)
     agent_deck: hog_26
     opponent_deck: hog_26
     pilot: hog_cycle
