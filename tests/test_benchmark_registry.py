@@ -104,9 +104,10 @@ def test_pilots_have_tiers_and_unimplemented_ones_refuse() -> None:
         assert p.tier in PILOT_TIERS
     assert get_pilot("noop").tier == "passive"
     assert get_pilot("random_legal").tier == "random"
-    with pytest.raises(PilotUnavailable):
-        get_pilot("hog_cycle").build()
+    assert get_pilot("hog_cycle").build() is not None  # implemented in P1
     assert get_pilot("frozen_hog_v3").tier == "frozen_learned"
+    with pytest.raises(PilotUnavailable):
+        get_pilot("frozen_hog_v3").build()  # no checkpoints until P2
 
 
 def test_scenario_ids_match_plan() -> None:
