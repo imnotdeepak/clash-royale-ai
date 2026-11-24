@@ -48,6 +48,7 @@ def test_f01_deck_loads_with_exact_costs() -> None:
     assert len(set(H)) == 8
     assert [cards[n].card_kind for n in ("Cannon", "Fireball", "Log")] == ["BUILDING", "SPELL", "SPELL"]
     assert cards["Skeletons"].count == 3  # ref
+    assert cards["IceGolemite"].hitpoints == 1228  # ref: official, Sept 2026 balance (1315 -> 1228)
 
 
 def test_f02_play_spends_elixir_and_cycles_hand() -> None:
@@ -202,7 +203,7 @@ def test_f11_ice_golem_death_damages_and_slows() -> None:
     assert 1766 - k.hp == 84  # PIN: death damage at level 11 (reference pending)
     assert k.speed_pct == 70  # PIN: 30% slow (reference pending)
     slow = [ms for name, ms in k.buffs if "Slow" in name]
-    assert slow and slow[0] == 2500  # PIN: slow duration 2.5 s (reference pending)
+    assert slow and slow[0] == 2500  # ref: official, Sept 2026 balance (slow 2s -> 2.5s)
 
 
 # ---------------------------------------------------------------------------- Ice Spirit
@@ -226,8 +227,8 @@ def test_f12_ice_spirit_jumps_splashes_and_freezes() -> None:
     assert not b.units("IceSpirits"), "the spirit is consumed by its jump"
     k, a = b.entity(knight_uid), b.entity(archer_uid)
     assert k.stun_ticks > 0 and a.stun_ticks > 0, "splash freezes both targets"
-    assert 1766 - k.hp == 110 and 304 - a.hp == 110  # PIN: damage at level 11 (reference pending)
-    assert 21 <= k.stun_ticks <= 24  # ref: freeze about 1.2 s (24 ticks; first tick already elapsed)
+    assert 1766 - k.hp == 110 and 304 - a.hp == 110  # ref (third-party L11 table): 110
+    assert k.stun_ticks == 22  # ref: official, July 2025 balance (freeze 1.2s -> 1.1s = 22 ticks)
     assert splashes == {tiles(1.5)}  # PIN: splash radius 1.5 tiles
 
 
@@ -313,7 +314,7 @@ def test_f17_fireball_travels_damages_and_knocks_back() -> None:
     flight = b.run_until(lambda s: not s.spells, 80)
     assert flight is not None and flight.tick - r.tick > 20  # it flies from the king, not instant
     k = b.entity(knight_uid)
-    assert 1766 - k.hp == 688  # PIN: level-11 damage (ref ~688)
+    assert 1766 - k.hp == 688  # ref (third-party L11 table, deckshop.pro): 688
     assert b.entity(near_uid) is None  # 304 HP Archer in the blast dies
     assert b.entity(far_uid) is not None  # ~4 tiles away: outside the 2.5-tile radius
     assert k.knockback_ticks > 0
@@ -326,7 +327,7 @@ def test_f18_fireball_reduced_crown_tower_damage() -> None:
     b.step(80)
     lost = PRINCESS_HP - b.tower_hp(RED)[1]
     assert 0 < lost < 688
-    assert lost == 159  # PIN: crown-tower damage (reference pending)
+    assert lost == 159  # ref: official, Sept 2026 balance (172 -> 159)
 
 
 # ---------------------------------------------------------------------------- The Log
@@ -353,7 +354,9 @@ def test_f19_log_rolls_ground_only_with_knockback() -> None:
         if m is not None and m.y > tiles(10) and m.hp < 230:
             minion_hp_hit_by_log = True
     assert lengths == {181_800}  # PIN: roll length 10.1 tiles
-    assert 1766 - b.entity(knight_uid).hp == 268  # PIN: level-11 damage (reference pending)
+    # OPEN (low severity): official July 2025 notes give 289 -> 266; engine and deckshop.pro's
+    # L11 table give 268. Pinned to the engine until resolved.
+    assert 1766 - b.entity(knight_uid).hp == 268
     assert knock > 0
     assert not b.units("Skeletons", RED)
     assert not minion_hp_hit_by_log
@@ -366,7 +369,7 @@ def test_f20_log_reduced_crown_tower_damage() -> None:
     b.step(60)
     lost = PRINCESS_HP - b.tower_hp(RED)[1]
     assert 0 < lost < 268
-    assert lost == 35  # PIN: crown-tower damage (reference pending)
+    assert lost == 35  # ref: official, June 2026 balance (41 -> 35)
 
 
 # ---------------------------------------------------------------------------- towers
